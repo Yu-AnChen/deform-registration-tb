@@ -207,24 +207,82 @@ _file_paths = """
 /Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/img-data/8MPP-affine/B5_3DHE_039-affine.ome.tif
 """.strip().split("\n")
 
+section_pairs = [
+    (1, 0),
+    (2, 1),
+    (3, 2),
+    (4, 3),
+    (5, 4),
+    (6, 4),
+    (7, 6),
+    (8, 7),
+    (9, 8),
+    (10, 9),
+    (11, 9),
+    (12, 11),
+    (13, 11),
+    (14, 11),
+    (15, 11),
+    (16, 11),
+    (17, 16),
+    (18, 17),
+    (19, 18),
+    (20, 19),
+    (21, 20),
+    (22, 21),
+    (23, 22),
+    (24, 23),
+    (25, 24),
+    (26, 25),
+    (27, 26),
+    (28, 27),
+    (29, 28),
+    (30, 29),
+    (31, 30),
+    (32, 31),
+    (33, 32),
+    (34, 33),
+    (35, 34),
+    (36, 35),
+    (37, 36),
+    (38, 37),
+]
+
+# difficult and manually configured pairs
+# section_pairs = [
+#     (6, 4),
+#     (10, 9),
+#     (11, 9),
+#     (13, 11),
+#     (16, 11),
+#     (24, 23),
+#     (25, 24),
+#     (26, 25),
+#     (27, 26),
+#     (29, 28),
+#     (31, 30),
+#     (33, 32),
+#     (36, 35),
+#     (37, 36),
+# ][:]
 
 import itertools  # noqa: E402
 
 sizes = [700, 800, 900]
 n_samples = [4000, 3000]
-
+grid_sizes = [20, 40, 80]
 conditions = [
-    {"sample_region_size": ss, "sample_number_of_pixels": ns}
-    for ss, ns in itertools.product(sizes, n_samples)
+    {"sample_region_size": ss, "sample_number_of_pixels": ns, "grid_size": gs}
+    for ss, ns, gs in itertools.product(sizes, n_samples, grid_sizes)
 ]
 
-elastix_config_dir = "/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/reg-param/config"
-elastix_tform_dir = "/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/reg-param/tform"
+elastix_config_dir = "/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/reg-param-pair-manual/config"
+elastix_tform_dir = "/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/reg-param-pair-manual/tform"
 
-file_paths = _file_paths[:]
+file_paths = [(_file_paths[i0], _file_paths[i1]) for i0, i1 in section_pairs]
 
 v = napari.Viewer()
-for f1, f2 in zip(file_paths[:-1], file_paths[1:]):
+for f2, f1 in file_paths:
     ref_path = pathlib.Path(f1)
     moving_path = pathlib.Path(f2)
     ref_name = ref_path.name.split("-")[0]
