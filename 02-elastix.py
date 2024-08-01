@@ -41,7 +41,7 @@ def get_default_crc_params(
     # p["NumberOfSpatialSamples"] = [f"{5000 // 2**i}" for i in range(4)[::-1]]
     p["UseRandomSampleRegion"] = ["true"]
     p["SampleRegionSize"] = [f"{sample_region_size}"]
-    p["NumberOfHistogramBins"] = ["64"]
+    p["NumberOfHistogramBins"] = ["32"]
 
     # number if iterations in gradient descent
     p["MaximumNumberOfIterations"] = [f"{number_of_iterations}"]
@@ -329,3 +329,145 @@ w2, *_ = _run_one_setting(
 w3, *_ = _run_one_setting(ref, moving, dict(sample_region_size=700))
 
 _run_one_setting(ref, moving, dict(sample_region_size=600))
+
+import networkx as nx  # noqa: E402
+import matplotlib.pyplot as plt  # noqa: E402
+import cv2  # noqa: E402
+
+
+v = napari.Viewer()
+G = nx.DiGraph(section_pairs[:])
+for mm, rr in section_pairs[:]:
+    ref_path = pathlib.Path(_file_paths[rr])
+    moving_path = pathlib.Path(_file_paths[mm])
+
+    ref = tifffile.imread(ref_path)
+    moving = tifffile.imread(moving_path)
+
+    print(
+        mm,
+        moving_path.name.replace("-affine.ome.tif", ""),
+        "-",
+        rr,
+        ref_path.name.replace("-affine.ome.tif", ""),
+    )
+
+    wimg, tform, _ = _run_one_setting(
+        palom.img_util.cv2_downscale_local_mean(ref, 4),
+        palom.img_util.cv2_downscale_local_mean(moving, 4),
+        dict(sample_region_size=200),
+    )
+
+    G.edges[mm, rr]["tform"] = tform
+
+    napari_kwargs = dict(
+        blending="additive",
+        visible=False,
+        name=moving_path.name.replace("-affine.ome.tif", ""),
+    )
+    v.add_image(
+        -palom.img_util.cv2_downscale_local_mean(ref, 4),
+        colormap="bop blue",
+        visible=False,
+        name=ref_path.name.replace("-affine.ome.tif", ""),
+    )
+    v.add_image(-wimg, colormap="bop orange", **napari_kwargs)
+
+
+# ---------------------------- visualize the graph --------------------------- #
+options = {
+    "font_size": 12,
+    "node_size": 300,
+    "node_color": "white",
+    "edgecolors": "black",
+    "linewidths": 1,
+    "width": 1,
+}
+pos = {
+    ii: (ii, 10 * (ii % 2 - 0.5) + 2 * (np.random.rand() - 0.5))
+    for ii in sorted(G.nodes)
+}
+
+plt.figure()
+nx.draw_networkx(G, pos=pos, **options)
+
+# use actual slide number instead of index in the list
+G_viz = nx.DiGraph(
+    [
+        (
+            pathlib.Path(_file_paths[mm])
+            .name.replace("-affine.ome.tif", "")
+            .replace("B5_3DHE_", ""),
+            pathlib.Path(_file_paths[rr])
+            .name.replace("-affine.ome.tif", "")
+            .replace("B5_3DHE_", ""),
+        )
+        for mm, rr in section_pairs[:]
+    ]
+)
+options = {
+    "font_size": 12,
+    "node_size": 700,
+    "node_color": "none",
+    "edgecolors": "none",
+    "linewidths": 1,
+    "width": 1,
+}
+pos = {
+    ii: (idx, 10 * (idx % 2 - 0.5) + 6 * (np.random.rand() - 0.5))[::-1]
+    for idx, ii in enumerate(sorted(G_viz.nodes))
+}
+
+plt.figure()
+nx.draw_networkx(G_viz, pos=pos, **options)
+
+
+# -------------------------- warp all image to first ------------------------- #
+def to_deformation_field(elastix_parameter):
+    shape = elastix_parameter.GetParameterMap(0).get("Size")[::-1]
+    shape = np.array(shape, dtype="int")
+    return itk.transformix_deformation_field(
+        itk.GetImageFromArray(np.zeros(shape, dtype="uint8")), elastix_parameter
+    )
+
+
+def aggregate_deformation_field(elastix_parameters):
+    shape = elastix_parameters[0].GetParameterMap(0).get("Size")[::-1]
+    shape = np.array(shape, dtype="int")
+    out = np.zeros((*shape, 2), dtype="float32")
+    for elastix_parameter in elastix_parameters:
+        out += to_deformation_field(elastix_parameter)
+    return out
+
+
+v = napari.Viewer()
+for ii in sorted(G.nodes):
+    moving_path = pathlib.Path(_file_paths[ii])
+    moving_name = moving_path.name.replace("-affine.ome.tif", "")
+    print(moving_name)
+    moving = palom.img_util.cv2_downscale_local_mean(
+        tifffile.imread(_file_paths[ii]), 4
+    )
+    sub_edges = G.subgraph(nx.descendants(G, ii).union({ii})).edges
+    if sub_edges:
+        deformation_field = np.moveaxis(
+            aggregate_deformation_field([G.edges[ee]["tform"] for ee in sub_edges]),
+            2,
+            0,
+        )
+        _, H, W = deformation_field.shape
+        dd = deformation_field + np.mgrid[:H, :W].astype("float32")[::-1]
+
+        moving = cv2.remap(
+            moving,
+            dd[0],
+            dd[1],
+            cv2.INTER_LINEAR,
+        )
+    v.add_image(
+        -moving,
+        visible=True,
+        blending="additive",
+        name=moving_name,
+        colormap="bop orange",
+    )
