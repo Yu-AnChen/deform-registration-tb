@@ -58,7 +58,7 @@ for f1, f2 in zip(file_paths[:-1], file_paths[1:]):
     aligner = palom.align.Aligner(
         ref_img=r1.pyramid[2][1],
         moving_img=r2.pyramid[2][1],
-        # do feature detection and matching at resolution of ~40 µm/pixel
+        # perform feature detection and matching at 32x downsample (64 µm/pixel?!)
         ref_thumbnail=palom.img_util.cv2_downscale_local_mean(r1.pyramid[4][1], 2),
         moving_thumbnail=palom.img_util.cv2_downscale_local_mean(r2.pyramid[4][1], 2),
         ref_thumbnail_down_factor=2 ** (5 - 2),
@@ -74,12 +74,23 @@ for f1, f2 in zip(file_paths[:-1], file_paths[1:]):
 
 # add upper-left padding
 ul_padding = skimage.transform.AffineTransform(translation=(250, 0)).params
-mxs_to_first = [functools.reduce(np.dot, mxs[:i] + [ul_padding]) for i in range(1, len(mxs) + 1)]
+mxs_to_first = [
+    functools.reduce(np.dot, mxs[:i] + [ul_padding]) for i in range(1, len(mxs) + 1)
+]
 
 shape = palom.reader.OmePyramidReader(file_paths[0]).pyramid[2][1].shape
 
 out_dir = pathlib.Path(r"Z:\yc296\computation\YC-20240801-soheil-3d-reg\8MPP-affine")
 out_dir.mkdir(exist_ok=True, parents=True)
+
+for ff in tqdm.tqdm(file_paths):
+    reader = palom.reader.OmePyramidReader(ff)
+    img = reader.pyramid[2][1].compute()
+    tifffile.imwrite(
+        out_dir / reader.path.name.replace(".ome.tif", "-ori.ome.tif"),
+        img,
+        compression="zlib",
+    )
 
 for ff, mm in zip(file_paths[:], tqdm.tqdm(mxs_to_first)):
     reader = palom.reader.OmePyramidReader(ff)

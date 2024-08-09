@@ -471,3 +471,42 @@ for ii in sorted(G.nodes):
         name=moving_name,
         colormap="bop orange",
     )
+
+# ------------------- warp images at a different resolution ------------------ #
+import skimage.transform
+import dask.array as da
+
+v2 = napari.Viewer()
+
+mmm = tifffile.imread(moving_path)
+dff = np.array(
+    [
+        skimage.transform.warp(
+            dff * 4.0,
+            skimage.transform.AffineTransform(scale=(1 / 4, 1 / 4)),
+            output_shape=mmm.shape,
+            preserve_range=True,
+        )
+        for dff in deformation_field
+    ]
+)
+dff += np.mgrid[: mmm.shape[0], : mmm.shape[1]].astype("float32")[::-1]
+wmmm = cv2.remap(
+    mmm,
+    dff[0],
+    dff[1],
+    cv2.INTER_LINEAR,
+)
+
+v2.add_image(tifffile.imread(_file_paths[0]), name="ref")
+v2.add_image(wmmm, name="warpped")
+
+
+# ---------- convert deform field to dask array for on disk caching ---------- #
+dadff = da.from_array(dff, chunks=1024)
+
+def _wrap(dform, img):
+    dform = np.array(dform)
+    return cv2.remap(img, dform[0], dform[1], cv2.INTER_LINEAR)
+
+dawmmm = dadff.map_blocks(_wrap, mmm, dtype=mmm.dtype, drop_axis=0).compute()
