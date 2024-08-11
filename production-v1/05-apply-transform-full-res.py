@@ -152,15 +152,15 @@ for mx, dform, ff in zip(mxs_to_first, dfs_to_first, file_paths):
         is_mask=False,
     )
 
-    moving = palom.reader.OmePyramidReader(ff).pyramid[0]
-
-    def _wrap_cv2(dform, img, cval):
-        dform = np.array(dform)
-        return cv2.remap(img, dform[1], dform[0], cv2.INTER_LINEAR, borderValue=cval)
+    # the chunk size (256, 256, 3) isn't ideal to be loaded with dask; hard-code
+    # the reading and axis swap
+    moving = tifffile.imread(ff, level=pyramid_level)
+    moving = np.moveaxis(moving, 2, 0)
+    # moving = palom.reader.OmePyramidReader(ff).pyramid[pyramid_level]
 
     mosaics = []
     for channel in moving:
-        cval = np.percentile(np.asarray(channel), 75).item()
+        cval = np.percentile(channel[::10, ::10], 75).item()
         warped_moving = tmgrid.map_blocks(
             _wrap_cv2,
             img=channel,
@@ -174,7 +174,7 @@ for mx, dform, ff in zip(mxs_to_first, dfs_to_first, file_paths):
     palom.pyramid.write_pyramid(
         mosaics,
         output_path=out_dir / out_filename,
-        pixel_size=2,
+        pixel_size=ref_reader.pixel_size,
         channel_names=list("RGB"),
         downscale_factor=4,
         compression="zlib",
