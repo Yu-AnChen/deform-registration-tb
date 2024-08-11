@@ -13,6 +13,31 @@ def _wrap_cv2(dform, img, cval):
     return cv2.remap(img, dform[1], dform[0], cv2.INTER_LINEAR, borderValue=cval)
 
 
+def _wrap_cv2_large(dform, img, cval):
+    # remap functions in opencv convert coordinates into 16-bit integer; for
+    # large image/coordinates, slice the appropiate image block and
+    # re-position the coordinate origin is required
+    dform = np.array(dform)
+    # add extra pixel for linear interpolation
+    rmin, cmin = np.floor(dform.min(axis=(1, 2))).astype("int") - 1
+    rmax, cmax = np.ceil(dform.max(axis=(1, 2))).astype("int") + 1
+
+    if np.any(np.asarray([rmax, cmax]) <= 0):
+        return np.full(dform.shape[1:], fill_value=cval, dtype=img.dtype)
+
+    rmin, cmin = np.clip([rmin, cmin], 0, None)
+    rmax, cmax = np.clip([rmax, cmax], None, img.shape)
+
+    dform -= np.reshape([rmin, cmin], (2, 1, 1))
+    dform = dform.astype("float32")
+
+    img = np.array(img[rmin:rmax, cmin:cmax])
+
+    if 0 in img.shape:
+        return np.full(dform.shape[1:], fill_value=cval, dtype=img.dtype)
+    return cv2.remap(img, dform[1], dform[0], cv2.INTER_LINEAR, borderValue=cval)
+
+
 ref_file_path = r"\\research.files.med.harvard.edu\hits\lsp-data\cycif-production\17-tuberculosis-aldridge\p17e21_3D_HE\ome-tiff images\LSP24521.ome.tif"
 
 file_paths = r"""
@@ -162,7 +187,7 @@ for mx, dform, ff in zip(mxs_to_first, dfs_to_first, file_paths):
     for channel in moving:
         cval = np.percentile(channel[::10, ::10], 75).item()
         warped_moving = tmgrid.map_blocks(
-            _wrap_cv2,
+            _wrap_cv2_large,
             img=channel,
             cval=cval,
             dtype=moving.dtype,
