@@ -51,7 +51,7 @@ def get_default_crc_params(
     # must set to write result image, could be a bug?!
     p["WriteResultImage"] = ["true"]
     # a bug in transformix_jacobian cannot handle using non-default output image
-    # format (such as tif, default is nii) 
+    # format (such as tif, default is nii)
     p["ResultImageFormat"] = ["nii"]
 
     return p
@@ -128,91 +128,52 @@ def write_parameter(param_obj, out_dir, prefix=None):
 
 
 _file_paths = """
-/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data/affine/B5_3DHE_001-affine.ome.tif
-/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data/affine/B5_3DHE_002-affine.ome.tif
-/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data/affine/B5_3DHE_003-affine.ome.tif
-/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data/affine/B5_3DHE_004-affine.ome.tif
-/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data/affine/B5_3DHE_005-affine.ome.tif
-/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data/affine/B5_3DHE_006-affine.ome.tif
-/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data/affine/B5_3DHE_007-affine.ome.tif
-/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data/affine/B5_3DHE_008-affine.ome.tif
-/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data/affine/B5_3DHE_009-affine.ome.tif
-/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data/affine/B5_3DHE_010-affine.ome.tif
-/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data/affine/B5_3DHE_011-affine.ome.tif
-/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data/affine/B5_3DHE_012-affine.ome.tif
-/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data/affine/B5_3DHE_013-affine.ome.tif
-/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data/affine/B5_3DHE_014-affine.ome.tif
-/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data/affine/B5_3DHE_015-affine.ome.tif
-/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data/affine/B5_3DHE_016-affine.ome.tif
-/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data/affine/B5_3DHE_017-affine.ome.tif
-/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data/affine/B5_3DHE_018-affine.ome.tif
-/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data/affine/B5_3DHE_019-affine.ome.tif
-/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data/affine/B5_3DHE_020-affine.ome.tif
-/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data/affine/B5_3DHE_021-affine.ome.tif
-/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data/affine/B5_3DHE_022-affine.ome.tif
-/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data/affine/B5_3DHE_023-affine.ome.tif
-/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data/affine/B5_3DHE_024-affine.ome.tif
-/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data/affine/B5_3DHE_025-affine.ome.tif
-/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data/affine/B5_3DHE_026-affine.ome.tif
-/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data/affine/B5_3DHE_027-affine.ome.tif
-/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data/affine/B5_3DHE_028-affine.ome.tif
-/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data/affine/B5_3DHE_029-affine.ome.tif
-/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data/affine/B5_3DHE_030-affine.ome.tif
-/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data/affine/B5_3DHE_031-affine.ome.tif
-/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data/affine/B5_3DHE_032-affine.ome.tif
-/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data/affine/B5_3DHE_033-affine.ome.tif
-/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data/affine/B5_3DHE_034-affine.ome.tif
-/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data/affine/B5_3DHE_035-affine.ome.tif
-/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data/affine/B5_3DHE_036-affine.ome.tif
-/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data/affine/B5_3DHE_037-affine.ome.tif
-/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data/affine/B5_3DHE_038-affine.ome.tif
-/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data/affine/B5_3DHE_039-affine.ome.tif
+/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data-v2/16x-affine/LSP24521-affine.ome.tif
+/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data-v2/16x-affine/LSP24524-affine.ome.tif
+/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data-v2/16x-affine/LSP24527-affine.ome.tif
+/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data-v2/16x-affine/LSP24530-affine.ome.tif
+/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data-v2/16x-affine/LSP24533-affine.ome.tif
+/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data-v2/16x-affine/LSP24536-affine.ome.tif
+/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data-v2/16x-affine/LSP24539-affine.ome.tif
+/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data-v2/16x-affine/LSP24542-affine.ome.tif
+/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data-v2/16x-affine/LSP24545-affine.ome.tif
+/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data-v2/16x-affine/LSP24548-affine.ome.tif
+/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data-v2/16x-affine/LSP24551-affine.ome.tif
+/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data-v2/16x-affine/LSP24554-affine.ome.tif
+/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data-v2/16x-affine/LSP24557-affine.ome.tif
+/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data-v2/16x-affine/LSP24560-affine.ome.tif
+/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data-v2/16x-affine/LSP24563-affine.ome.tif
+/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data-v2/16x-affine/LSP24566-affine.ome.tif
+/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data-v2/16x-affine/LSP24569-affine.ome.tif
+/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data-v2/16x-affine/LSP24572-affine.ome.tif
+/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data-v2/16x-affine/LSP24575-affine.ome.tif
+/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data-v2/16x-affine/LSP24578-affine.ome.tif
+/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data-v2/16x-affine/LSP24581-affine.ome.tif
+/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data-v2/16x-affine/LSP24584-affine.ome.tif
+/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data-v2/16x-affine/LSP24587-affine.ome.tif
+/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data-v2/16x-affine/LSP24590-affine.ome.tif
+/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data-v2/16x-affine/LSP24593-affine.ome.tif
+/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data-v2/16x-affine/LSP24596-affine.ome.tif
+/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data-v2/16x-affine/LSP24599-affine.ome.tif
+/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data-v2/16x-affine/LSP24602-affine.ome.tif
+/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data-v2/16x-affine/LSP24605-affine.ome.tif
+/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data-v2/16x-affine/LSP24608-affine.ome.tif
+/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data-v2/16x-affine/LSP24611-affine.ome.tif
+/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data-v2/16x-affine/LSP24614-affine.ome.tif
+/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data-v2/16x-affine/LSP24617-affine.ome.tif
+/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data-v2/16x-affine/LSP24620-affine.ome.tif
+/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data-v2/16x-affine/LSP24623-affine.ome.tif
+/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data-v2/16x-affine/LSP24626-affine.ome.tif
+/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data-v2/16x-affine/LSP24629-affine.ome.tif
+/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data-v2/16x-affine/LSP24632-affine.ome.tif
+/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data-v2/16x-affine/LSP24635-affine.ome.tif
+/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data-v2/16x-affine/LSP24638-affine.ome.tif
 """.strip().split("\n")
 
-elastix_config_dir = "/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data/elastix/config"
-elastix_tform_dir = "/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data/elastix/tform"
-registered_dir = "/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data/elastix/registered-thumbnail"
+elastix_config_dir = "/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data-v2/elastix/config"
+elastix_tform_dir = "/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data-v2/elastix/tform"
+registered_dir = "/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data-v2/elastix/registered-thumbnail"
 
-section_pairs = [
-    (1, 0),
-    (2, 1),
-    (3, 2),
-    (4, 3),
-    (5, 4),
-    (6, 4),
-    (7, 6),
-    (8, 7),
-    (9, 8),
-    (10, 9),
-    (11, 9),
-    (12, 11),
-    (13, 11),
-    (14, 11),
-    (15, 11),
-    (16, 11),
-    (17, 16),
-    (18, 17),
-    (19, 18),
-    (20, 19),
-    (21, 20),
-    (22, 21),
-    (23, 22),
-    (24, 23),
-    (25, 24),
-    (26, 25),
-    (27, 26),
-    (28, 27),
-    (29, 28),
-    (30, 29),
-    (31, 30),
-    (32, 31),
-    (33, 32),
-    (34, 33),
-    (35, 34),
-    (36, 35),
-    (37, 36),
-    (38, 37),
-]
 
 # use index 19 as reference
 section_pairs = [
@@ -220,22 +181,22 @@ section_pairs = [
     (1, 2),
     (2, 3),
     (3, 4),
-    (4, 7),
-    (5, 7),
-    (6, 7),
+    (4, 5),
+    (5, 8),
+    (6, 8),
     (7, 8),
     (8, 9),
-    (9, 11),
-    (10, 11),
-    (11, 14),
-    (12, 14),
-    (13, 14),
-    (14, 16),
-    (15, 16),
+    (9, 10),
+    (10, 12),
+    (11, 12),
+    (12, 15),
+    (13, 15),
+    (14, 15),
+    (15, 17),
     (16, 17),
     (17, 18),
     (18, 19),
-    (20, 19),
+    (19, 20),
     (21, 20),
     (22, 21),
     (23, 22),
@@ -254,12 +215,13 @@ section_pairs = [
     (36, 35),
     (37, 36),
     (38, 37),
+    (39, 38),
 ]
 
 
 v = napari.Viewer()
 G = nx.DiGraph(section_pairs[:])
-for mm, rr in section_pairs[:]:
+for mm, rr in section_pairs[30:]:
     ref_path = pathlib.Path(_file_paths[rr])
     moving_path = pathlib.Path(_file_paths[mm])
 
@@ -309,7 +271,7 @@ for mm, rr in section_pairs[:]:
 import matplotlib.pyplot as plt  # noqa: E402
 
 options = {
-    "font_size": 12,
+    "font_size": 10,
     "node_size": 300,
     "node_color": "white",
     "edgecolors": "black",
@@ -317,12 +279,15 @@ options = {
     "width": 1,
 }
 pos = {
-    ii: (ii, 10 * (ii % 2 - 0.5) + 2 * (np.random.rand() - 0.5))
-    for ii in sorted(G.nodes)
+    ii: (idx, 10 * (idx % 2 - 0.5) + 6 * (np.random.rand() - 0.5))[::-1]
+    for idx, ii in enumerate(sorted(G.nodes))
 }
 
 plt.figure()
 nx.draw_networkx(G, pos=pos, **options)
+plt.gcf().savefig(
+    "/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data-v2/elastix/pairs-graph-to-20-index.pdf"
+)
 
 # use actual slide number instead of index in the list
 G_viz = nx.DiGraph(
@@ -341,8 +306,8 @@ G_viz = nx.DiGraph(
     ]
 )
 options = {
-    "font_size": 12,
-    "node_size": 700,
+    "font_size": 6,
+    "node_size": 2_000,
     "node_color": "none",
     "edgecolors": "none",
     "linewidths": 1,
@@ -356,7 +321,7 @@ pos = {
 plt.figure()
 nx.draw_networkx(G_viz, pos=pos, **options)
 plt.gcf().savefig(
-    '/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data/elastix/pairs-graph-to-19.pdf'
+    "/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data-v2/elastix/pairs-graph-to-20.pdf"
 )
 
 
@@ -365,8 +330,9 @@ def to_spatial_jacobian(elastix_parameter):
     shape = elastix_parameter.GetParameterMap(0).get("Size")[::-1]
     shape = np.array(shape, dtype="int")
     return itk.transformix_jacobian(
-        itk.GetImageFromArray(np.zeros(shape, dtype="uint8")), elastix_parameter,
-        spatial_jacobian_determinant_image_type="tif"
+        itk.GetImageFromArray(np.zeros(shape, dtype="uint8")),
+        elastix_parameter,
+        spatial_jacobian_determinant_image_type="tif",
     )
 
 

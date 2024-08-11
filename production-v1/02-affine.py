@@ -47,51 +47,52 @@ def set_subplot_size(w, h, ax=None):
 
 
 file_paths = """
-/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/img-data/8MPP-ori/B5_3DHE_001-ori.ome.tif
-/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/img-data/8MPP-ori/B5_3DHE_002-ori.ome.tif
-/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/img-data/8MPP-ori/B5_3DHE_003-ori.ome.tif
-/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/img-data/8MPP-ori/B5_3DHE_004-ori.ome.tif
-/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/img-data/8MPP-ori/B5_3DHE_005-ori.ome.tif
-/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/img-data/8MPP-ori/B5_3DHE_006-ori.ome.tif
-/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/img-data/8MPP-ori/B5_3DHE_007-ori.ome.tif
-/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/img-data/8MPP-ori/B5_3DHE_008-ori.ome.tif
-/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/img-data/8MPP-ori/B5_3DHE_009-ori.ome.tif
-/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/img-data/8MPP-ori/B5_3DHE_010-ori.ome.tif
-/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/img-data/8MPP-ori/B5_3DHE_011-ori.ome.tif
-/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/img-data/8MPP-ori/B5_3DHE_012-ori.ome.tif
-/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/img-data/8MPP-ori/B5_3DHE_013-ori.ome.tif
-/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/img-data/8MPP-ori/B5_3DHE_014-ori.ome.tif
-/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/img-data/8MPP-ori/B5_3DHE_015-ori.ome.tif
-/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/img-data/8MPP-ori/B5_3DHE_016-ori.ome.tif
-/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/img-data/8MPP-ori/B5_3DHE_017-ori.ome.tif
-/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/img-data/8MPP-ori/B5_3DHE_018-ori.ome.tif
-/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/img-data/8MPP-ori/B5_3DHE_019-ori.ome.tif
-/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/img-data/8MPP-ori/B5_3DHE_020-ori.ome.tif
-/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/img-data/8MPP-ori/B5_3DHE_021-ori.ome.tif
-/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/img-data/8MPP-ori/B5_3DHE_022-ori.ome.tif
-/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/img-data/8MPP-ori/B5_3DHE_023-ori.ome.tif
-/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/img-data/8MPP-ori/B5_3DHE_024-ori.ome.tif
-/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/img-data/8MPP-ori/B5_3DHE_025-ori.ome.tif
-/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/img-data/8MPP-ori/B5_3DHE_026-ori.ome.tif
-/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/img-data/8MPP-ori/B5_3DHE_027-ori.ome.tif
-/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/img-data/8MPP-ori/B5_3DHE_028-ori.ome.tif
-/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/img-data/8MPP-ori/B5_3DHE_029-ori.ome.tif
-/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/img-data/8MPP-ori/B5_3DHE_030-ori.ome.tif
-/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/img-data/8MPP-ori/B5_3DHE_031-ori.ome.tif
-/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/img-data/8MPP-ori/B5_3DHE_032-ori.ome.tif
-/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/img-data/8MPP-ori/B5_3DHE_033-ori.ome.tif
-/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/img-data/8MPP-ori/B5_3DHE_034-ori.ome.tif
-/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/img-data/8MPP-ori/B5_3DHE_035-ori.ome.tif
-/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/img-data/8MPP-ori/B5_3DHE_036-ori.ome.tif
-/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/img-data/8MPP-ori/B5_3DHE_037-ori.ome.tif
-/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/img-data/8MPP-ori/B5_3DHE_038-ori.ome.tif
-/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/img-data/8MPP-ori/B5_3DHE_039-ori.ome.tif
+/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data-v2/16x-down-ori/LSP24521-ori.ome.tif
+/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data-v2/16x-down-ori/LSP24524-ori.ome.tif
+/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data-v2/16x-down-ori/LSP24527-ori.ome.tif
+/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data-v2/16x-down-ori/LSP24530-ori.ome.tif
+/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data-v2/16x-down-ori/LSP24533-ori.ome.tif
+/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data-v2/16x-down-ori/LSP24536-ori.ome.tif
+/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data-v2/16x-down-ori/LSP24539-ori.ome.tif
+/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data-v2/16x-down-ori/LSP24542-ori.ome.tif
+/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data-v2/16x-down-ori/LSP24545-ori.ome.tif
+/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data-v2/16x-down-ori/LSP24548-ori.ome.tif
+/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data-v2/16x-down-ori/LSP24551-ori.ome.tif
+/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data-v2/16x-down-ori/LSP24554-ori.ome.tif
+/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data-v2/16x-down-ori/LSP24557-ori.ome.tif
+/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data-v2/16x-down-ori/LSP24560-ori.ome.tif
+/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data-v2/16x-down-ori/LSP24563-ori.ome.tif
+/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data-v2/16x-down-ori/LSP24566-ori.ome.tif
+/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data-v2/16x-down-ori/LSP24569-ori.ome.tif
+/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data-v2/16x-down-ori/LSP24572-ori.ome.tif
+/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data-v2/16x-down-ori/LSP24575-ori.ome.tif
+/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data-v2/16x-down-ori/LSP24578-ori.ome.tif
+/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data-v2/16x-down-ori/LSP24581-ori.ome.tif
+/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data-v2/16x-down-ori/LSP24584-ori.ome.tif
+/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data-v2/16x-down-ori/LSP24587-ori.ome.tif
+/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data-v2/16x-down-ori/LSP24590-ori.ome.tif
+/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data-v2/16x-down-ori/LSP24593-ori.ome.tif
+/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data-v2/16x-down-ori/LSP24596-ori.ome.tif
+/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data-v2/16x-down-ori/LSP24599-ori.ome.tif
+/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data-v2/16x-down-ori/LSP24602-ori.ome.tif
+/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data-v2/16x-down-ori/LSP24605-ori.ome.tif
+/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data-v2/16x-down-ori/LSP24608-ori.ome.tif
+/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data-v2/16x-down-ori/LSP24611-ori.ome.tif
+/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data-v2/16x-down-ori/LSP24614-ori.ome.tif
+/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data-v2/16x-down-ori/LSP24617-ori.ome.tif
+/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data-v2/16x-down-ori/LSP24620-ori.ome.tif
+/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data-v2/16x-down-ori/LSP24623-ori.ome.tif
+/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data-v2/16x-down-ori/LSP24626-ori.ome.tif
+/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data-v2/16x-down-ori/LSP24629-ori.ome.tif
+/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data-v2/16x-down-ori/LSP24632-ori.ome.tif
+/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data-v2/16x-down-ori/LSP24635-ori.ome.tif
+/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data-v2/16x-down-ori/LSP24638-ori.ome.tif
 """.strip().split("\n")[:]
 
 
 # write affine aligned image to file
 out_dir = pathlib.Path(
-    r"/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data/affine"
+    r"/Users/yuanchen/HMS Dropbox/Yu-An Chen/000 local remote sharing/20240729-deform-registration-soheil/production-v1/img-data-v2/16x-affine"
 )
 out_dir.mkdir(exist_ok=True, parents=True)
 
