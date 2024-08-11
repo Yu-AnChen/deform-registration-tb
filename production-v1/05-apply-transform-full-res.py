@@ -88,34 +88,38 @@ for ff in file_paths:
     )
 
 
+Affine = skimage.transform.AffineTransform
+
+# hairy settings for scaling...
+pyramid_level = 0
+d_moving = (
+    4 ** (2 - pyramid_level) * 2**3
+)  # downsize factor used in the initial affine mx calculation
+d_ref = (
+    4 ** (2 - pyramid_level) * 2**3
+)  # downsize factor used in the initial affine mx calculation
+downscale_dform = 4 ** (2 - pyramid_level) * 2**2
+mx_d = Affine(scale=downscale_dform).params
+
+
 # add upper-left padding
 padding = 0.1
 ref_reader = palom.reader.OmePyramidReader(ref_file_path)
-ref_shape = ref_reader.pyramid[0].shape[1:]
+ref_shape = ref_reader.pyramid[pyramid_level].shape[1:]
+
 
 padded_shape = np.ceil(np.multiply(ref_shape, 2 * padding + 1)).astype("int")
 # translation will be applied post alignment to the first at the lower resolution
-offset = padding * np.divide(ref_shape, 2 ** (5 - 0))[::-1]
-
-
-# hairy settings for scaling...
-d_pyramid = 2
-moving_pyramid_level = 0
-d_moving = d_pyramid**5  # same as aligner.moving_thumbnail_down_factor
-d_ref = d_pyramid**5  # same as aligner.ref_thumbnail_down_factor
-d_output = d_pyramid**moving_pyramid_level * d_moving / d_ref
+offset = padding * np.divide(ref_shape, 4**2 * 2**3)[::-1]
 
 
 out_dir = pathlib.Path(
-    r"Z:\yc296\computation\YC-20240801-soheil-3d-reg\2MPP-registered-v4"
+    r"Z:\yc296\computation\YC-20240801-soheil-3d-reg\registered-full-res"
 )
 out_dir.mkdir(exist_ok=True, parents=True)
 
-Affine = skimage.transform.AffineTransform
 for mx, dform, ff in zip(mxs_to_first, dfs_to_first, file_paths):
     print(pathlib.Path(ff).name)
-    downscale_dform = 2**4
-    mx_d = Affine(scale=downscale_dform).params
 
     tform = (
         Affine(scale=1 / d_moving)
