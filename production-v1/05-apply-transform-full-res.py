@@ -137,24 +137,19 @@ for mx, dform, ff in zip(mxs_to_first, dfs_to_first, file_paths):
         .astype("float32")
     )
 
-    mgrid = da.meshgrid(
-        da.arange(padded_shape[0], dtype="float32", chunks=1024),
-        da.arange(padded_shape[1], dtype="float32", chunks=1024),
-        indexing="ij",
-    )
+    mapping = da.zeros((2, *padded_shape), dtype="float32", chunks=1024)
 
     _tform = tform + Affine(scale=1 / downscale_dform)
-    _mgrid = skimage.transform.warp_coords(_tform.inverse, ddy.shape)
+    # add extra pixel for linear interpolation
+    _mgrid = skimage.transform.warp_coords(_tform.inverse, np.add(ddy.shape, 1))
 
-    _mgrid += np.array([ddy, ddx])
+    _mgrid[:, : ddy.shape[0], : ddy.shape[1]] += np.array([ddy, ddx])
 
     tmgrid = palom.align.block_affine_transformed_moving_img(
-        ref_img=mgrid[0],
+        ref_img=mapping[0],
         moving_img=_mgrid.astype("float32"),
         mxs=Affine(scale=downscale_dform).params,
         is_mask=False,
-        # rescaling from a padded image, there shouldn't be empty pixels
-        fill_empty=0,
     )
 
     moving = palom.reader.OmePyramidReader(ff).pyramid[0]
