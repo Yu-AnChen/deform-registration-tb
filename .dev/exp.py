@@ -1,3 +1,52 @@
+# ---------------------------------------------------------------------------- #
+#                          windows memory leak np.dot                          #
+# ---------------------------------------------------------------------------- #
+import numpy as np
+import dask.array as da
+import dask.diagnostics
+
+
+def _warp_coords(mx, row_slice, col_slice, dtype="float32"):
+    _mgrid = np.meshgrid(
+        np.arange(*row_slice, dtype=dtype),
+        np.arange(*col_slice, dtype=dtype),
+        indexing="ij",
+    )
+    shape = np.asarray(_mgrid).shape
+    coords_xyz = np.concatenate([np.ones_like(_mgrid[0]), *_mgrid])[::-1].reshape(3, -1)
+    _mgrid = None
+
+    return (
+        np.linalg.multi_dot([coords_xyz.T, mx.T])
+        .T[:2][::-1]
+        .reshape(shape)
+        .astype(dtype)
+    )
+
+
+import numpy as np
+import dask.array as da
+import dask.diagnostics
+
+
+def test(_):
+    _mgrid = np.meshgrid(
+        np.arange(-500, 500, dtype="float32"),
+        np.arange(-500, 500, dtype="float32"),
+        indexing="ij",
+    )
+    coords_xyz = np.concatenate([np.ones_like(_mgrid[0]), *_mgrid])[::-1].reshape(3, -1)
+    ooo = np.dot(coords_xyz.T, np.random.random(size=(3, 3))).T[:2][::-1].reshape((2, 1000, 1000)).astype("float32")
+    return ooo[0]
+
+
+ttt = da.ones((20, 20), chunks=1).map_blocks(
+    test, dtype="float"
+)
+
+# ---------------------------------------------------------------------------- #
+#                                    asfdsa                                    #
+# ---------------------------------------------------------------------------- #
 import numpy as np
 import dask.array as da
 import skimage.transform
@@ -152,7 +201,6 @@ tmgrid = palom.align.block_affine_transformed_moving_img(
 )
 
 test2 = tmgrid.compute()[0, :1000, :1000]
-
 
 
 # ---------------------------------------------------------------------------- #
