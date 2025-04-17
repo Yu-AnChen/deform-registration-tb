@@ -174,7 +174,7 @@ def run_transform(
     palom.pyramid.write_pyramid(
         mosaics,
         output_path=out_path,
-        pixel_size=ref_reader.pixel_size,
+        pixel_size=ref_reader.pixel_size * 4**pyramid_level,
         channel_names=list("RGB"),
         downscale_factor=4,
         compression="zlib",

@@ -172,7 +172,7 @@ def run_transform(
     palom.pyramid.write_pyramid(
         mosaics,
         output_path=out_path,
-        pixel_size=ref_reader.pixel_size,
+        pixel_size=ref_reader.pixel_size * 4**pyramid_level,
         channel_names=list("RGB"),
         downscale_factor=4,
         compression="zlib",
@@ -245,6 +245,7 @@ mx_paths = [
 out_dir = pathlib.Path(
     r"Z:\yc296\computation\YC-20240801-soheil-3d-reg\registered-full-res-skimage"
 )
+out_dir.mkdir(exist_ok=True, parents=True)
 output_paths = [
     out_dir / pathlib.Path(ff).name.replace(".ome.tif", "-elastix.ome.tif")
     for ff in file_paths
